@@ -15,4 +15,8 @@
       shell: sudo apt-get install -y mongodb-org
     - name: Iniciar mongo db
       shell: sudo systemctl start mongod
-
+    - name: Abrir las ip
+      lineinfile:
+        path: /etc/mongod.conf
+        regexp: 'bindIp: 127.0.0.1'
+        line: 'bindIp: 0.0.0.0'
