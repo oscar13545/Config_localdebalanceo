@@ -3,22 +3,22 @@
   become: yes
 
   tasks:
-    - name: Install gnupg
+    - name: install 1/
       shell: sudo apt-get install gnupg
-    - name: Extraer la key
-      shell: wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key ad$
-    - name: Traer repositorio
-      shell: echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongo$
-    - name: Actualizar packetes
+    - name: install 2/
+      shell: wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
+    - name: install 3/
+      shell: echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+    - name: insatll 4/
       shell: sudo apt-get update
-    - name: Install mongo
+    - name: install 5/
       shell: sudo apt-get install -y mongodb-org
-    - name: Stop mongo db
+    - name: Stop
       shell: sudo systemctl stop mongod
     - name: Abrir las ip
       lineinfile:
         path: /etc/mongod.conf
         regexp: 'bindIp: 127.0.0.1'
-        line: '  bindIp: 0.0.0.0'
-    - name: Iniciar mongo db
+        line: 'bindIp: 0.0.0.0'
+    - name: Start
       shell: sudo systemctl start mongod
