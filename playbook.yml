@@ -19,6 +19,6 @@
       lineinfile:
         path: /etc/mongod.conf
         regexp: 'bindIp: 127.0.0.1'
-        line: '  bindIp: 0.0.0.0'
+        line: '  bindIp: 52.91.151.69,3.238.33.52'
     - name: Start
       shell: sudo systemctl start mongod
