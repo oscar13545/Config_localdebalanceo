@@ -1,0 +1,24 @@
+- name: Instalar Docker y Docker Compose y correr proyecto
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: Actualizar cache de paquetes de apt
+    shell: sudo apt-get update
+
+  - name: Instalar Python
+    shell: sudo apt install docker.io docker-compose -y
+  
+  - name: Install Git package
+    apt:
+      name: git
+      state: present
+  
+  - name: git clone 
+    shell: git clone https://github.com/oscar13545/To-do-list.git
+
+  - name: start docker
+    shell: cd To-do-list && sudo docker-compose up -d
+
+
+    
